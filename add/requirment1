@@ -1,0 +1,208 @@
+Perfect, Kavin! Let’s put everything together into a **full, polished, department-ready Requirement Analysis document** for your mini project. I’ll structure it **professionally**, including all concepts, algorithms, tech stack, data, grey-box design, and constraints/limitations.
+
+---
+
+# **Requirement Analysis Document**
+
+**Project Title:**
+**“An Explainable ML-Based System for False Positive Filtering in Financial Transactions”**
+
+---
+
+## **1. Introduction / Project Overview**
+
+Financial institutions increasingly rely on automated fraud detection systems to prevent losses. However, legitimate transactions are often **incorrectly flagged as fraudulent (False Positives, FP)**, disrupting user experience and customer trust.
+
+Currently, there is **no standardized tool** to explain why transactions are flagged as FPs. Existing systems are either proprietary or partially transparent.
+
+**Objective:**
+
+* Build a **grey-box, explainable ML-based system** that filters False Positives.
+* Provide **feature-level explanations** for analysts to validate transactions.
+* Restrict access to specified individuals while maintaining **confidentiality**.
+* Standardize FP flagging for practical use in fintech environments.
+
+**Key Considerations:**
+
+* Identify which data is accessible to White / Grey / Black box users.
+* Provide a clear overview of FP patterns, historical fraud patterns, and explainable ML decisions.
+
+---
+
+## **2. Core Concepts Needed**
+
+1. **Transaction Definition**
+
+   * Financial activity with features: ID, amount, timestamp, source/destination account, device, geolocation, channel.
+
+2. **Transaction Confusion Matrix**
+
+   * TP, FP, TN, FN — FP is the main focus.
+
+3. **Patterns to Detect**
+
+   * Fraud patterns: high-frequency transactions, unusual amounts, geolocation anomalies, device mismatch, OTP manipulation.
+   * False positive patterns: large but normal transactions, rare merchant transactions, duplicate flagged transactions.
+
+4. **Flagging Mechanisms**
+
+   * Rule-based: thresholds, blacklist/whitelist.
+   * ML-based: model scores, risk scoring, threshold optimization.
+   * Grey-box: partial insights visible to analysts only.
+
+---
+
+## **3. Historical Fraud Transactions and Patterns**
+
+1. **Credit/Debit Card Fraud:** stolen/cloned cards, card-not-present transactions.
+2. **Account Takeover:** phishing, fake login portals, credential theft.
+3. **Online Banking Fraud:** OTP interception, fake apps, session hijacking.
+4. **Money Laundering / Structuring:** multiple small transfers to hide total amount.
+5. **Anomalies:** high-value purchase in unusual location, rapid micro-transactions.
+
+---
+
+## **4. Sorting and Filtering FP Patterns**
+
+* Sort FP patterns by frequency, transaction amount, customer segment, time, and location.
+* Use sorted FP patterns to guide **feature selection**, ML training, and threshold tuning.
+* Helps analysts focus on **high-probability false positives**.
+
+---
+
+## **5. Machine Learning Algorithms**
+
+**Baseline / Interpretable Models:**
+
+1. Logistic Regression
+2. Decision Tree
+3. K-Nearest Neighbors (KNN)
+
+**Ensemble / High-Performance Models:**
+4. Random Forest
+5. Gradient Boosting: XGBoost, LightGBM, CatBoost
+
+**Anomaly Detection / Rare Cases:**
+6. Isolation Forest
+7. One-Class SVM
+8. Autoencoder (optional, advanced)
+
+**Threshold Optimization / Cost-Sensitive Learning:**
+
+* Adjust thresholds to control FP rates according to business needs.
+
+---
+
+## **6. Supporting Algorithms (DSA)**
+
+1. Sorting & searching (timestamps, amounts)
+2. Hashing / dictionaries (fast historical lookup)
+3. Queues / stacks (alert workflow management)
+4. Graph traversal / link analysis (optional, multi-account fraud detection)
+
+---
+
+## **7. Recommended Tech Stack**
+
+| Layer              | Tools / Libraries                            | Purpose                                    |
+| ------------------ | -------------------------------------------- | ------------------------------------------ |
+| ML / Data          | Python 3.10+                                 | Core programming language                  |
+| ML Algorithms      | scikit-learn, XGBoost, LightGBM, CatBoost    | Model training & prediction                |
+| Imbalance Handling | imbalanced-learn (SMOTE / oversampling)      | Handle skewed datasets                     |
+| Explainability     | SHAP, matplotlib, seaborn, plotly            | Feature-level explanations & visualization |
+| Web Interface      | Streamlit / Flask                            | Interactive dashboard                      |
+| Database           | MySQL / SQLite                               | Store transactions and predictions         |
+| Version Control    | Git / GitHub                                 | Source code management                     |
+| Hosting            | Streamlit Cloud / Localhost / PythonAnywhere | Web deployment                             |
+
+---
+
+## **8. Grey-Box System Design & Data Access**
+
+**Access Levels:**
+
+| Box Type  | Access Level      | Data Visibility                                                               |
+| --------- | ----------------- | ----------------------------------------------------------------------------- |
+| White Box | Developer / Admin | Full access to model internals, features, training data                       |
+| Grey Box  | Analyst           | Feature-level insights for flagged transactions; no access to model internals |
+| Black Box | End User          | Only final decision (transaction approved/blocked); no internal details       |
+
+**Purpose:**
+
+* Maintain confidentiality while providing **interpretable outputs**.
+* Aligns with real-world fintech practices.
+* Access may be **restricted further by internal client policies** (optional detail).
+
+---
+
+## **9. Data Flow / System Architecture**
+
+```
+Transaction Dataset (CSV / Database)
+          │
+          ▼
+Primary Fraud Detection Model
+          │
+Flagged Transactions (Potential FPs)
+          │
+          ▼
+Explainable FP Filtering Layer (Grey-box)
+          │
+SHAP / Feature-Level Explanations
+          │
+          ▼
+Web Dashboard (Streamlit / Flask)
+          │
+Analyst Review & Action
+```
+
+---
+
+## **10. Evaluation Metrics**
+
+* Confusion Matrix (focus on FP)
+* False Positive Rate (FPR)
+* Precision, Recall, F1-Score
+* Feature contribution explanations (SHAP)
+* Threshold optimization comparison (before vs after FP filtering)
+
+---
+
+## **11. Expected Outputs / Deliverables**
+
+1. FP filtered transaction outputs
+2. Feature-level explanations (SHAP)
+3. Dashboard with metrics and visualizations
+4. Grey-box controlled access for analysts
+5. Documentation: methodology, system design, evaluation, user guide
+
+---
+
+## **12. Project Constraints / Limitations**
+
+1. **FP Focus Only:**
+
+   * The project is limited to **False Positive filtering**.
+   * TP, TN, and FN optimization is **out of scope**, as it would require redesigning primary fraud detection models.
+
+2. **Partial Explainability (Grey-Box):**
+
+   * Analysts see **only safe feature-level explanations**; full model internals remain hidden.
+   * Explainability is **“partial-of-partial”**, reflecting real-world fintech confidentiality constraints.
+
+3. **Optional Note:**
+
+   * Future work could expand to **full confusion matrix optimization** while maintaining explainability, which could evolve into a capstone-level project.
+
+---
+
+## ✅ **Conclusion**
+
+This requirement analysis provides a **complete, precise, and industry-relevant foundation** for a mini project in FP filtering.
+
+* Combines: concepts, historical patterns, FP analysis, ML algorithms, supporting DSA, tech stack, grey-box design, evaluation, and constraints.
+* Scope is **manageable for a mini project**, while reflecting real-world fintech practices.
+
+---
+
+
