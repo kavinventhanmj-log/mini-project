@@ -1,4 +1,4 @@
-**Explainable Transaction Monitoring System for False Positive Reduction**(Mini Project)
+**Explainable Transaction Prevention & Monitoring System for False Positive Reduction**(Mini Project)
 **📌 Project Overview**
 
 This project focuses on building a pseudo real-time transaction processing system integrated with a machine learning fraud detection model. The goal is not just to score transactions but to actively decide actions — Allow, Block, or Review — while reducing false positives and supporting analysts with explanations.
